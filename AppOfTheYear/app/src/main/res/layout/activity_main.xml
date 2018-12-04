@@ -15,8 +15,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="13dp"
-        android:text="Check voorraad"
+        android:text="@string/check_voorraad"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="launchCheckVoorraad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -27,7 +28,7 @@
         android:layout_marginBottom="224dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:contentDescription="MainPicture"
+        android:contentDescription="@string/mainpicture"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
