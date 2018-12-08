@@ -8,8 +8,8 @@
     tools:context=".VoorraadCheck"
     tools:showIn="@layout/activity_voorraad_check">
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerviewFoods"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        ></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>
