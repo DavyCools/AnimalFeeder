@@ -19,13 +19,13 @@
         <activity
             android:name=".VoorraadCheck"
             android:label="@string/title_activity_voorraad_check"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=
-                    "hectorbrasfalean.ap.be.appoftheyear.MainActivity" />
+                android:value="hectorbrasfalean.ap.be.appoftheyear.MainActivity" />
         </activity>
+        <activity android:name=".FoodInformation"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package hectorbrasfalean.ap.be.appoftheyear;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +12,15 @@ import android.widget.TextView;
 import java.util.LinkedList;
 
 public class WordListAdapter extends
-        RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
-
+        RecyclerView.Adapter<WordListAdapter.WordViewHolder>
+{
+    private Context mContext;
     private LayoutInflater mInflater;
     private final LinkedList<String> mWordList;
 
     public WordListAdapter(Context context,
                            LinkedList<String> wordList) {
+        mContext = context;
         mInflater = LayoutInflater.from(context);
         this.mWordList = wordList;
     }
@@ -41,13 +44,30 @@ public class WordListAdapter extends
         return mWordList.size();
     }
 
-    public class WordViewHolder extends RecyclerView.ViewHolder {
+    public class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         public final TextView wordItemView;
+
         final WordListAdapter mAdapter;
         public WordViewHolder(View itemView, WordListAdapter adapter) {
             super(itemView);
             wordItemView = itemView.findViewById(R.id.word);
             this.mAdapter = adapter;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, FoodInformation.class);
+
+            // Get the position of the item that was clicked.
+            int mPosition = getLayoutPosition();
+            // Use that to access the affected item in mWordList.
+            String element = mWordList.get(mPosition);
+            intent.putExtra("foodName",element);
+            mContext.startActivity(intent);
+            // Notify the adapter, that the data has changed so it can
+            // update the RecyclerView to display the data.
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
