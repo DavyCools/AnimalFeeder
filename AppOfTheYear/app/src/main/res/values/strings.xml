@@ -3,4 +3,5 @@
     <string name="check_voorraad">Check voorraad</string>
     <string name="mainpicture">MainPicture</string>
     <string name="title_activity_voorraad_check">VoorraadCheck</string>
+    <string name="action_settings">Settings</string>
 </resources>
