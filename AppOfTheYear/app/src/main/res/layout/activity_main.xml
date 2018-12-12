@@ -17,9 +17,11 @@
         android:layout_marginBottom="13dp"
         android:onClick="launchCheckVoorraad"
         android:text="@string/check_voorraad"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/button_background"  />
 
     <ImageView
         android:id="@+id/imageView"
