@@ -11,7 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -57,11 +60,49 @@ public class VoorraadCheck extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(VoorraadCheck.this, NewFoodActivity.class);
+                startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
             }
         });
 
     }
 
+    public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Word word = new Word(data.getStringExtra(NewFoodActivity.EXTRA_REPLY));
+            mWordViewModel.insert(word);
+        } else {
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.empty_not_saved,
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.clear_data) {
+            // Add a toast just for confirmation
+            Toast.makeText(this, "Clearing the data...",
+                    Toast.LENGTH_SHORT).show();
+
+            // Delete the existing data
+            mWordViewModel.deleteAll();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_voorraad,menu);
+        return true;
+    }
 }

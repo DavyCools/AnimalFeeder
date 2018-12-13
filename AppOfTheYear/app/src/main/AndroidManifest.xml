@@ -25,7 +25,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hectorbrasfalean.ap.be.appoftheyear.MainActivity" />
         </activity>
-        <activity android:name=".FoodInformation"></activity>
+        <activity android:name=".FoodInformation" />
+        <activity android:name=".NewFoodActivity"></activity>
     </application>
 
 </manifest>
