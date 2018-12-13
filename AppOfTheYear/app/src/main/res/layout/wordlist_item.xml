@@ -8,5 +8,6 @@
 
     <TextView
         android:id="@+id/word"
-        style="@style/word_style" />
+        style="@style/word_style"
+        tools:text="placeholder text"/>
 </LinearLayout>

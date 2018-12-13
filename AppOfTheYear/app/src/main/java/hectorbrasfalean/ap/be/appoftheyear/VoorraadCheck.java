@@ -1,7 +1,10 @@
 package hectorbrasfalean.ap.be.appoftheyear;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,18 +14,44 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class VoorraadCheck extends AppCompatActivity {
-    private final LinkedList<String> mWordList = new LinkedList<>();
+    private List<Word> mWordList; //= new LinkedList<>();
     private RecyclerView mRecyclerView;
-    private WordListAdapter mAdapter;
+    private WordViewModel mWordViewModel;
+    private WordListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voorraad_check);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Get a handle to the RecyclerView.
+        mRecyclerView = findViewById(R.id.recyclerviewFoods);
+        // Create an adapter and supply the data to be displayed.
+        final WordListAdapter adapter = new WordListAdapter(this);
+        // Connect the adapter with the RecyclerView.
+        mRecyclerView.setAdapter(adapter);
+        // Give the RecyclerView a default layout manager.
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Get a new or existing ViewModel from the ViewModelProvider.
+        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
+
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+        mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
+            @Override
+            public void onChanged(@Nullable List<Word> words) {
+                // Update the cached copy of the words in the adapter.
+                adapter.setWords(words);
+            }
+        });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -33,19 +62,6 @@ public class VoorraadCheck extends AppCompatActivity {
             }
         });
 
-        // Put initial data into the word list.
-        for (int i = 0; i < 20; i++) {
-            mWordList.addLast("Word " + i);
-        }
-
-        // Get a handle to the RecyclerView.
-        mRecyclerView = findViewById(R.id.recyclerviewFoods);
-        // Create an adapter and supply the data to be displayed.
-        mAdapter = new WordListAdapter(this, mWordList);
-        // Connect the adapter with the RecyclerView.
-        mRecyclerView.setAdapter(mAdapter);
-        // Give the RecyclerView a default layout manager.
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 }
