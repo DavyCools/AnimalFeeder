@@ -1,16 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodInformation">
-
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:padding="24dp">
     <TextView
         android:id="@+id/textViewFood"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="Naam eten"
+        android:textSize="46sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="81dp"
-        tools:layout_editor_absoluteY="173dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewHoeveelheid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hoeveelheid (kg):"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/buttonDeleteAmount"
+            android:layout_width="28dp"
+            android:layout_height="38dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_remove" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/buttonAddAmount"
+            android:layout_width="31dp"
+            android:layout_height="38dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewMelding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Melding vanaf (kg):"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/buttonDeleteAlert"
+            android:layout_width="28dp"
+            android:layout_height="38dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_remove" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="number"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/buttonAddAlert"
+            android:layout_width="31dp"
+            android:layout_height="38dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textViewDagelijksVerbruik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dagelijks verbruik (gram):"
+            android:textSize="20sp" />
+
+        <Switch
+            android:id="@+id/switchDdagelijksVerbruik"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:clickable="true"
+            android:theme="@style/SCBSwitch"
+            tools:checked="false" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:id="@+id/buttonDeleteDagelijksVerbruik"
+            android:layout_width="28dp"
+            android:layout_height="38dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_remove" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
+            android:gravity="center"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/buttonAddDagelijksVerbruik"
+            android:layout_width="31dp"
+            android:layout_height="38dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@android:drawable/ic_input_add" />
+
+    </LinearLayout>
+
+</LinearLayout>
