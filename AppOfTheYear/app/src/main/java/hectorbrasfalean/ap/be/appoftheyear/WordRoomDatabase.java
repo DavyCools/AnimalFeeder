@@ -52,7 +52,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
 
         private final WordDao mDao;
         // Array leeg laten !!!!!!!!!! @@@@@@@@@@@@@@@@@@@@@@@@
-        String[] words = {/*"Hooi", "AVEVE Basiskorrel", "AVEVE Optima+ Balance","AVEVE Vitabar","Hartog Gras-mix"*/};
+        String[] words = {"Hooi", "AVEVE Basiskorrel", "AVEVE Optima+ Balance","AVEVE Vitabar","Hartog Gras-mix"};
 
         PopulateDbAsync(WordRoomDatabase db) {
             mDao = db.wordDao();
@@ -61,6 +61,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
 
+            // If we have no words, then create the initial list of words
             if (mDao.getAnyWord().length < 1) {
                 for (int i = 0; i <= words.length - 1; i++) {
                     Food food = new Food(words[i]);
