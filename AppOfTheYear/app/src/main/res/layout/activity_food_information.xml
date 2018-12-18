@@ -17,7 +17,8 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:text="Naam eten"
-        android:textSize="46sp" />
+        android:textStyle="bold"
+        android:textSize="22sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,11 +36,12 @@
             android:id="@+id/buttonDeleteAmount"
             android:layout_width="28dp"
             android:layout_height="38dp"
+            android:onClick="DecreaseTotalAmount"
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_remove" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editTextTotalAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,6 +54,7 @@
             android:id="@+id/buttonAddAmount"
             android:layout_width="31dp"
             android:layout_height="38dp"
+            android:onClick="IncreaseTotalAmount"
             android:background="@android:color/transparent"
             android:drawableLeft="@android:drawable/ic_input_add" />
 
@@ -77,7 +80,7 @@
             android:drawableLeft="@drawable/ic_remove" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editTextNotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -129,7 +132,7 @@
             android:drawableLeft="@drawable/ic_remove" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editTextDagelijksVerbruik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class WordRepository {
     private WordDao mWordDao;
-    private LiveData<List<Word>> mAllWords;
+    private LiveData<List<Food>> mAllWords;
 
     WordRepository(Application application) {
         WordRoomDatabase db = WordRoomDatabase.getDatabase(application);
@@ -16,15 +16,15 @@ public class WordRepository {
         mAllWords = mWordDao.getAllWords();
     }
 
-    LiveData<List<Word>> getAllWords() {
+    LiveData<List<Food>> getAllWords() {
         return mAllWords;
     }
 
-    public void insert (Word word) {
-        new insertAsyncTask(mWordDao).execute(word);
+    public void insertWord (Food food) {
+        new insertAsyncTask(mWordDao).execute(food);
     }
 
-    private static class insertAsyncTask extends AsyncTask<Word, Void, Void> {
+    private static class insertAsyncTask extends AsyncTask<Food, Void, Void> {
 
         private WordDao mAsyncTaskDao;
 
@@ -33,8 +33,8 @@ public class WordRepository {
         }
 
         @Override
-        protected Void doInBackground(final Word... params) {
-            mAsyncTaskDao.insert(params[0]);
+        protected Void doInBackground(final Food... params) {
+            mAsyncTaskDao.insertWord(params[0]);
             return null;
         }
     }
@@ -56,4 +56,7 @@ public class WordRepository {
             return null;
         }
     }
+
+
+
 }

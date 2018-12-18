@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,11 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class VoorraadCheck extends AppCompatActivity {
-    private List<Word> mWordList; //= new LinkedList<>();
+    private List<Food> mFoodList;
     private RecyclerView mRecyclerView;
     private WordViewModel mWordViewModel;
     private WordListAdapter adapter;
@@ -42,17 +40,19 @@ public class VoorraadCheck extends AppCompatActivity {
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+
+
         // Get a new or existing ViewModel from the ViewModelProvider.
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
 
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
+        mWordViewModel.getAllWords().observe(this, new Observer<List<Food>>() {
             @Override
-            public void onChanged(@Nullable List<Word> words) {
-                // Update the cached copy of the words in the adapter.
-                adapter.setWords(words);
+            public void onChanged(@Nullable List<Food> foods) {
+                // Update the cached copy of the foods in the adapter.
+                adapter.setWords(foods);
             }
         });
 
@@ -73,8 +73,8 @@ public class VoorraadCheck extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Word word = new Word(data.getStringExtra(NewFoodActivity.EXTRA_REPLY));
-            mWordViewModel.insert(word);
+            Food food = new Food(data.getStringExtra(NewFoodActivity.EXTRA_REPLY));
+            mWordViewModel.insertWord(food);
         } else {
             Toast.makeText(
                     getApplicationContext(),

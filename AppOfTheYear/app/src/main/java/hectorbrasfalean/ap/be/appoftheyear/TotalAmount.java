@@ -6,13 +6,14 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "word_table")
-public class Word {
-    @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "word")
-    private String mWord;
+public class TotalAmount {
 
-    public Word(@NonNull String word) {this.mWord = word;}
+        @NonNull
+        @PrimaryKey
+        @ColumnInfo(name = "amount")
+        private int mAmount;
 
-    public String getWord(){return this.mWord;}
+        public TotalAmount(@NonNull int amount) {this.mAmount = amount;}
+
+        public int getAmount(){return this.mAmount;}
 }

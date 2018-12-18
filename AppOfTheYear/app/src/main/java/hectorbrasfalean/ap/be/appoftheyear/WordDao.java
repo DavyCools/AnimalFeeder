@@ -5,6 +5,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import java.util.List;
 
@@ -12,14 +13,22 @@ import java.util.List;
 public interface WordDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Word word);
+    void insertWord(Food food);
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    void updateFoodTotalAmount(Food food);
 
     @Query("DELETE FROM word_table")
     void deleteAll();
 
-    @Query("SELECT * from word_table ORDER BY word ASC")
-    LiveData<List<Word>> getAllWords();
+    @Query("SELECT * from word_table ORDER BY food ASC")
+    LiveData<List<Food>> getAllWords();
 
     @Query("SELECT * from word_table LIMIT 1")
-    Word[] getAnyWord();
+    Food[] getAnyWord();
+
+    @Query("SELECT * from word_table WHERE food = :foodName")
+    Food getFoodByName(String foodName);
+
+
 }
