@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FoodInformation extends AppCompatActivity {
     private TextView foodNameDisplay,dailyAmountDisplay,totalAmountDisplay,notificationDisplay;
@@ -42,21 +43,41 @@ public class FoodInformation extends AppCompatActivity {
         notificationDisplay.setText(Integer.toString(notificationAmount));
 
     }
-    public void afterTextChanged(Editable s){
-        //dailyAmountDisplay.afterTe
+    @Override
+    protected void onDestroy() {
+        if(totalAmountDisplay.getText().toString().trim().length() > 0){
+            currentFood.setDailyAmount(Integer.parseInt(dailyAmountDisplay.getText().toString()));
+            currentFood.setNotificationAmount(Integer.parseInt(notificationDisplay.getText().toString()));
+            currentFood.setTotalAmount(Integer.parseInt(totalAmountDisplay.getText().toString()));
+            mWordDao.updateFoodTotalAmount(currentFood);
+        }
+        else{
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Waardes van legen velden werden niet opgeslagen.",
+                    Toast.LENGTH_LONG).show();
+        }
+        super.onDestroy();
     }
 
     public void DecreaseTotalAmount(View view) {
 
         if(totalAmount > 0){
-            currentFood.setTotalAmount(--totalAmount);
-            mWordDao.updateFoodTotalAmount(currentFood);
-            totalAmountDisplay.setText(Integer.toString(totalAmount));
 
+            if(totalAmountDisplay.getText().toString().trim().length() > 0){
+                totalAmount = Integer.parseInt(totalAmountDisplay.getText().toString());
+                currentFood.setTotalAmount(--totalAmount);
+                mWordDao.updateFoodTotalAmount(currentFood);
+                totalAmountDisplay.setText(Integer.toString(totalAmount));
+            }
+            else{
+                totalAmountDisplay.setError("Het veld mag niet leeg zijn, vul een waarde in.");
+            }
         }
     }
 
     public void IncreaseTotalAmount(View view) {
+            totalAmount = Integer.parseInt(totalAmountDisplay.getText().toString());
             currentFood.setTotalAmount(++totalAmount);
             mWordDao.updateFoodTotalAmount(currentFood);
             totalAmountDisplay.setText(Integer.toString(totalAmount));

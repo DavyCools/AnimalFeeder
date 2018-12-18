@@ -29,6 +29,7 @@
         android:layout_gravity="bottom|end"
         android:tint="@android:color/white"
         app:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/outline_for_fab"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_add_for_fab" />
 
