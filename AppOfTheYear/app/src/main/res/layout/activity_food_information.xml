@@ -73,9 +73,10 @@
             android:textSize="20sp" />
 
         <Button
-            android:id="@+id/buttonDeleteAlert"
+            android:id="@+id/buttonDeleteNotification"
             android:layout_width="28dp"
             android:layout_height="38dp"
+            android:onClick="DecreaseNotificationAmount"
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_remove" />
 
@@ -90,9 +91,10 @@
             android:text="0" />
 
         <Button
-            android:id="@+id/buttonAddAlert"
+            android:id="@+id/buttonAddNotification"
             android:layout_width="31dp"
             android:layout_height="38dp"
+            android:onClick="IncreaseNotificationAmount"
             android:background="@android:color/transparent"
             android:drawableLeft="@android:drawable/ic_input_add" />
 
@@ -128,6 +130,7 @@
             android:id="@+id/buttonDeleteDagelijksVerbruik"
             android:layout_width="28dp"
             android:layout_height="38dp"
+            android:onClick="DecreaseDailyAmount"
             android:background="@android:color/transparent"
             android:drawableLeft="@drawable/ic_remove" />
 
@@ -145,6 +148,7 @@
             android:id="@+id/buttonAddDagelijksVerbruik"
             android:layout_width="31dp"
             android:layout_height="38dp"
+            android:onClick="IncreaseDailyAmount"
             android:background="@android:color/transparent"
             android:drawableLeft="@android:drawable/ic_input_add" />
 

@@ -16,7 +16,7 @@ public interface WordDao {
     void insertWord(Food food);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateFoodTotalAmount(Food food);
+    void updateFood(Food food);
 
     @Query("DELETE FROM word_table")
     void deleteAll();
