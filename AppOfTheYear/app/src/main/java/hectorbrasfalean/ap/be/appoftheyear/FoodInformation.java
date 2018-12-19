@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 public class FoodInformation extends AppCompatActivity {
     private TextView foodNameDisplay,dailyAmountDisplay,totalAmountDisplay,notificationDisplay;
     private WordDao mWordDao;
-    private int totalAmount;
+    private double totalAmount;
     private int dailyAmount;
     private int notificationAmount;
     private String foodName;
@@ -39,7 +41,7 @@ public class FoodInformation extends AppCompatActivity {
 
         foodNameDisplay.setText(foodName);
         dailyAmountDisplay.setText(Integer.toString(dailyAmount));
-        totalAmountDisplay.setText(Integer.toString(totalAmount));
+        totalAmountDisplay.setText(Double.toString(totalAmount));
         notificationDisplay.setText(Integer.toString(notificationAmount));
 
     }
@@ -75,10 +77,13 @@ public class FoodInformation extends AppCompatActivity {
 
         if(totalAmount > 0){
             if(totalAmountDisplay.getText().toString().trim().length() > 0){
-                totalAmount = Integer.parseInt(totalAmountDisplay.getText().toString());
+                totalAmount = Double.parseDouble(totalAmountDisplay.getText().toString());
+                if(totalAmount < 1){
+                    totalAmount = 1;
+                }
                 currentFood.setTotalAmount(--totalAmount);
                 mWordDao.updateFood(currentFood);
-                totalAmountDisplay.setText(Integer.toString(totalAmount));
+                totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.0) / 100.0));
             }
             else{
                 ErrorMessage(totalAmountDisplay);
@@ -88,10 +93,10 @@ public class FoodInformation extends AppCompatActivity {
 
     public void IncreaseTotalAmount(View view) {
         if(totalAmountDisplay.getText().toString().trim().length() > 0) {
-            totalAmount = Integer.parseInt(totalAmountDisplay.getText().toString());
+            totalAmount = Double.parseDouble(totalAmountDisplay.getText().toString());
             currentFood.setTotalAmount(++totalAmount);
             mWordDao.updateFood(currentFood);
-            totalAmountDisplay.setText(Integer.toString(totalAmount));
+            totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.0) / 100.0));
         }
         else{
             ErrorMessage(totalAmountDisplay);

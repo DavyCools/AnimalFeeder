@@ -14,7 +14,7 @@ public class Food {
     @ColumnInfo(name = "dailyAmount")
     private int dailyAmount = 0;
     @ColumnInfo(name = "totalAmount")
-    private int totalAmount = 0;
+    private double totalAmount = 0;
     @ColumnInfo(name = "notificationAmount")
     private int notificationAmount = 0;
 
@@ -22,7 +22,7 @@ public class Food {
 
     public int getDailyAmount() {return this.dailyAmount;}
 
-    public int getTotalAmount() {return this.totalAmount;}
+    public double getTotalAmount() {return this.totalAmount;}
 
     public String getWord(){return this.mWord;}
 
@@ -30,7 +30,7 @@ public class Food {
         this.dailyAmount = dailyAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
