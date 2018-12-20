@@ -49,7 +49,7 @@ public class FoodInformation extends AppCompatActivity {
     protected void onDestroy() {
         int checkAll = 0;
         if(totalAmountDisplay.getText().toString().trim().length() > 0){
-            currentFood.setTotalAmount(Integer.parseInt(totalAmountDisplay.getText().toString()));
+            currentFood.setTotalAmount(Double.parseDouble(totalAmountDisplay.getText().toString()));
             checkAll++;
         }
         if(dailyAmountDisplay.getText().toString().trim().length() > 0){
