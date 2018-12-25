@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="hectorbrasfalean.ap.be.appoftheyear">
-
+    <uses-permission android:name="android.permission.SET_ALARM"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".FoodInformation" />
         <activity android:name=".NewFoodActivity"></activity>
+
+        <receiver android:name=".Notification_receiver"/>
     </application>
 
 </manifest>

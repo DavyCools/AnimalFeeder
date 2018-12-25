@@ -112,11 +112,13 @@
             android:textSize="20sp" />
 
         <Switch
-            android:id="@+id/switchDdagelijksVerbruik"
+            android:id="@+id/switchDagelijksVerbruik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
             android:clickable="true"
+            android:textOff="OFF"
+            android:textOn="ON"
             android:theme="@style/SCBSwitch"
             tools:checked="false" />
 

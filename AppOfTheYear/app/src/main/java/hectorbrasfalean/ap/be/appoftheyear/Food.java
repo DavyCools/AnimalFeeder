@@ -17,6 +17,8 @@ public class Food {
     private double totalAmount = 0;
     @ColumnInfo(name = "notificationAmount")
     private int notificationAmount = 0;
+    @ColumnInfo(name = "dailyDecrease")
+    private boolean dailyDecrease;
 
     public Food(@NonNull String word) {this.mWord = word;}
 
@@ -40,6 +42,14 @@ public class Food {
 
     public void setNotificationAmount(int notificationAmount) {
         this.notificationAmount = notificationAmount;
+    }
+
+    public boolean getDailyDecrease() {
+        return dailyDecrease;
+    }
+
+    public void setDailyDecrease(boolean dailyDecrease) {
+        this.dailyDecrease = dailyDecrease;
     }
 }
 

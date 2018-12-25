@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,8 +19,10 @@ public class FoodInformation extends AppCompatActivity {
     private double totalAmount;
     private int dailyAmount;
     private int notificationAmount;
+    private boolean dagelijksVerbruikActivated;
     private String foodName;
     private Food currentFood;
+    private Switch mSwitch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +47,16 @@ public class FoodInformation extends AppCompatActivity {
         dailyAmountDisplay.setText(Integer.toString(dailyAmount));
         totalAmountDisplay.setText(Double.toString(totalAmount));
         notificationDisplay.setText(Integer.toString(notificationAmount));
-
+        dagelijksVerbruikActivated = currentFood.getDailyDecrease();
+        mSwitch = findViewById(R.id.switchDagelijksVerbruik);
+        mSwitch.setChecked(dagelijksVerbruikActivated);
+        mSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dagelijksVerbruikActivated = !dagelijksVerbruikActivated;
+                currentFood.setDailyDecrease(dagelijksVerbruikActivated);
+            }
+        });
     }
     @Override
     protected void onDestroy() {
@@ -107,6 +120,8 @@ public class FoodInformation extends AppCompatActivity {
         if(dailyAmount > 0){
             if(dailyAmountDisplay.getText().toString().trim().length() > 0){
                 dailyAmount = Integer.parseInt(dailyAmountDisplay.getText().toString());
+                if(dailyAmount < 50)
+                    dailyAmount = 50;
                 dailyAmount -= 50;
                 currentFood.setTotalAmount(dailyAmount);
                 mWordDao.updateFood(currentFood);
