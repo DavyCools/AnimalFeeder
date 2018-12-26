@@ -25,23 +25,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        registerAlarm();
 
-        // Moet in een onclickListener maar wss met zo'n een balk om aan en af te zetten
-        // via het instellingen menu. Dus is nog niet volledig af
+    }
 
-        //Get date
+    private void registerAlarm() {
         Calendar calendar = Calendar.getInstance();
-        // When the notification will pop up
-        calendar.set(Calendar.HOUR_OF_DAY,19);
-        calendar.set(Calendar.MINUTE,16);
-        // intent
-        Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);
-        // pendingintent
-        PendingIntent broadcast = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        //Alarm service
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,broadcast);
-
+        calendar.set(Calendar.HOUR_OF_DAY, 13);
+        calendar.set(Calendar.MINUTE, 29);
+        calendar.set(Calendar.SECOND, 0);
+        Intent intent1 = new Intent(MainActivity.this, Notification_receiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
     @Override
