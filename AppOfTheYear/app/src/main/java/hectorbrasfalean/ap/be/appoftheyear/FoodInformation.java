@@ -17,7 +17,7 @@ public class FoodInformation extends AppCompatActivity {
     private TextView foodNameDisplay,dailyAmountDisplay,totalAmountDisplay,notificationDisplay;
     private WordDao mWordDao;
     private double totalAmount;
-    private int dailyAmount;
+    private double dailyAmount;
     private int notificationAmount;
     private boolean dagelijksVerbruikActivated;
     private String foodName;
@@ -44,7 +44,7 @@ public class FoodInformation extends AppCompatActivity {
         notificationAmount = currentFood.getNotificationAmount();
 
         foodNameDisplay.setText(foodName);
-        dailyAmountDisplay.setText(Integer.toString(dailyAmount));
+        dailyAmountDisplay.setText(Double.toString(dailyAmount));
         totalAmountDisplay.setText(Double.toString(totalAmount));
         notificationDisplay.setText(Integer.toString(notificationAmount));
         dagelijksVerbruikActivated = currentFood.getDailyDecrease();
@@ -66,7 +66,7 @@ public class FoodInformation extends AppCompatActivity {
             checkAll++;
         }
         if(dailyAmountDisplay.getText().toString().trim().length() > 0){
-            currentFood.setDailyAmount(Integer.parseInt(dailyAmountDisplay.getText().toString()));
+            currentFood.setDailyAmount(Double.parseDouble(dailyAmountDisplay.getText().toString()));
             checkAll++;
         }
         if(notificationDisplay.getText().toString().trim().length() > 0){
@@ -125,7 +125,7 @@ public class FoodInformation extends AppCompatActivity {
                 dailyAmount -= 50;
                 currentFood.setTotalAmount(dailyAmount);
                 mWordDao.updateFood(currentFood);
-                dailyAmountDisplay.setText(Integer.toString(dailyAmount));
+                dailyAmountDisplay.setText(Double.toString(dailyAmount));
             }
             else{
                 ErrorMessage(dailyAmountDisplay);
@@ -139,7 +139,7 @@ public class FoodInformation extends AppCompatActivity {
             dailyAmount += 50;
             currentFood.setTotalAmount(dailyAmount);
             mWordDao.updateFood(currentFood);
-            dailyAmountDisplay.setText(Integer.toString(dailyAmount));
+            dailyAmountDisplay.setText(Double.toString(dailyAmount));
         }
         else{
             ErrorMessage(dailyAmountDisplay);

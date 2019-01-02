@@ -57,26 +57,5 @@ public class WordRepository {
         }
     }
 
-    /*public void getFoodByName(String foodName)  {
-        new getFoodByNameAsyncTask(mWordDao).execute(foodName);
-    }
-
-    private static class getFoodByNameAsyncTask extends AsyncTask<String, String, Food> {
-        private WordDao mAsyncTaskDao;
-
-        getFoodByNameAsyncTask(WordDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Food doInBackground(String... values) {
-            return mAsyncTaskDao.getFoodByName(values[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Food result){
-            super.onPostExecute(result);
-        }
-    }*/
 
 }

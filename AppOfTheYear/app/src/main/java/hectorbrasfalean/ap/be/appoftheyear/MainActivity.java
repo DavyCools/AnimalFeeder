@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
 
         final Observer<List<Food>> mObserver = new Observer<List<Food>>() {
@@ -46,13 +45,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mWordViewModel.getAllWords().observe(this,mObserver);
-
     }
 
     private void registerAlarm(List<Food> foods) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 15);
-        calendar.set(Calendar.MINUTE, 25);
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 28);
         calendar.set(Calendar.SECOND,0);
         Intent intent1 = new Intent(MainActivity.this, Notification_receiver.class);
 
@@ -60,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
            mAllFoodNames.add(currentFood.getFood());
         }
         intent1.putExtra("ListFoodNames",mAllFoodNames);
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) this.getSystemService(this.ALARM_SERVICE);
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);

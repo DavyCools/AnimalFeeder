@@ -60,12 +60,12 @@ public class Notification_receiver extends BroadcastReceiver  {
             if (currentFood.getDailyDecrease()) {
                 if (currentFood.getTotalAmount() == 0)
                     isEmpty = true;
-                else if (currentFood.getTotalAmount() < currentFood.getDailyAmount() && !isEmpty) {
+                else if (currentFood.getTotalAmount() < currentFood.getDailyAmount()/1000 && !isEmpty) {
                     currentFood.setTotalAmount(0);
                     mWordDao.updateFood(currentFood);
                 }
                 else if (!isEmpty) {
-                    currentFood.setTotalAmount(currentFood.getTotalAmount() - currentFood.getDailyAmount());
+                    currentFood.setTotalAmount(currentFood.getTotalAmount() - currentFood.getDailyAmount()/1000);
                     mWordDao.updateFood(currentFood);
                 }
                 isEmpty = false;
