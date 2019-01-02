@@ -3,33 +3,38 @@ package hectorbrasfalean.ap.be.appoftheyear;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.arch.lifecycle.LiveData;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.NotificationCompat;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Notification_receiver extends BroadcastReceiver {
-    private WordDao mWordDao;
-    private boolean notificationEnabled;
-    private List<Food> mAllWords;
+public class Notification_receiver extends BroadcastReceiver  {
+
     private String CHANNEL_ID;
+    private boolean isEmpty;
+    private int notificationID;
+    private ArrayList<String> mAllFoodNames = new ArrayList<>();
+    private WordDao mWordDao;
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent){
 
-
+        mAllFoodNames = intent.getStringArrayListExtra("ListFoodNames");
+        WordRoomDatabase db = WordRoomDatabase.getDatabase(context.getApplicationContext());
+        mWordDao = db.wordDao();
 
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-
             CHANNEL_ID = "my_channel_01";
             CharSequence name = "my_channel";
             String Description = "This is my channel";
@@ -50,40 +55,53 @@ public class Notification_receiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        for (String currentFoodName : mAllFoodNames) {
+            Food currentFood = mWordDao.getFoodByName(currentFoodName);
+            if (currentFood.getDailyDecrease()) {
+                if (currentFood.getTotalAmount() == 0)
+                    isEmpty = true;
+                else if (currentFood.getTotalAmount() < currentFood.getDailyAmount() && !isEmpty) {
+                    currentFood.setTotalAmount(0);
+                    mWordDao.updateFood(currentFood);
+                }
+                else if (!isEmpty) {
+                    currentFood.setTotalAmount(currentFood.getTotalAmount() - currentFood.getDailyAmount());
+                    mWordDao.updateFood(currentFood);
+                }
+                isEmpty = false;
+            }
+            if(currentFood.getTotalAmount() == 0){
+                NotificationCompat.Builder mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context,CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_stock_low)
+                        .setContentTitle("Food stock is empty")
+                        .setContentText("Food stock for " + currentFoodName + " is empty")
+                        .setAutoCancel(true)
+                        .setWhen(when)
+                        .setContentIntent(pendingIntent);
+                notificationManager.notify(notificationID, mNotifyBuilder.build());
+                notificationID++;
+            }
+            else if (currentFood.getTotalAmount() <= currentFood.getNotificationAmount()){
+                NotificationCompat.Builder mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context,CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_stock_low)
+                        .setContentTitle("Food stock low")
+                        .setContentText("Food stock for " + currentFoodName + " is low")
+                        .setAutoCancel(true)
+                        .setWhen(when)
+                        .setContentIntent(pendingIntent);
+                notificationManager.notify(notificationID, mNotifyBuilder.build());
+                notificationID++;
+            }
+        }
+
         NotificationCompat.Builder mNotifyBuilder = (NotificationCompat.Builder) new NotificationCompat.Builder(context,CHANNEL_ID)
-                .setSmallIcon(R.drawable.horse)
+                .setSmallIcon(R.drawable.ic_daily_notification)
                 .setContentTitle("Animals have been fed")
                 .setContentText("Food stock has decreased where enabled")
                 .setAutoCancel(true)
                 .setWhen(when)
-                .setContentIntent(pendingIntent)
-                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-        notificationManager.notify(0, mNotifyBuilder.build());
-
-
-        //NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        //WordRoomDatabase db = WordRoomDatabase.getDatabase(context);
-        //mWordDao = db.wordDao();
-        //mAllWords = (List<Food>) mWordDao.getAllWords();
-
-        //Intent  repeating_intent = new Intent(context,MainActivity.class);
-        //repeating_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        //PendingIntent pendingIntent = PendingIntent.getActivity(context,100,repeating_intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        //NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-        //        .setAutoCancel(true)
-        //        .setContentIntent(pendingIntent)
-        //        .setSmallIcon(android.R.drawable.sym_def_app_icon)
-        //        .setContentText("All animals have been fed")
-        //        .setContentTitle("Food stock decreased");
-        //notificationEnabled = false;
-        //for (int i = 0; i < mAllWords.size(); i++) {
-        //    if(mAllWords.get(i).getDailyDecrease());
-        //        notificationEnabled = true;
-        //}
-        //if(notificationEnabled)
-        //    notificationManager.notify(100,builder.build());
-
+                .setContentIntent(pendingIntent);
+        notificationManager.notify(notificationID, mNotifyBuilder.build());
+        notificationID++;
     }
 }

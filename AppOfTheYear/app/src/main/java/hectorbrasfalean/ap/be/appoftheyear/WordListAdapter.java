@@ -34,7 +34,7 @@ public class WordListAdapter extends
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
         if (mFoods != null) {
             Food current = mFoods.get(position);
-            holder.wordItemView.setText(current.getWord());
+            holder.wordItemView.setText(current.getFood());
         } else {
             // Covers the case of data not being ready yet.
             holder.wordItemView.setText("No Food");
@@ -70,9 +70,9 @@ public class WordListAdapter extends
 
             // Get the position of the item that was clicked.
             int mPosition = getLayoutPosition();
-            // Use that to access the affected item in mWordList.
+            // Use that to access the affected item in mFoods.
             Food element = mFoods.get(mPosition);
-            intent.putExtra("foodName", element.getWord());
+            intent.putExtra("foodName", element.getFood());
             mContext.startActivity(intent);
             // Notify the adapter, that the data has changed so it can
             // update the RecyclerView to display the data.

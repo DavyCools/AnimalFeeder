@@ -18,7 +18,6 @@ import android.widget.Toast;
 import java.util.List;
 
 public class VoorraadCheck extends AppCompatActivity {
-    private List<Food> mFoodList;
     private RecyclerView mRecyclerView;
     private WordViewModel mWordViewModel;
     private WordListAdapter adapter;

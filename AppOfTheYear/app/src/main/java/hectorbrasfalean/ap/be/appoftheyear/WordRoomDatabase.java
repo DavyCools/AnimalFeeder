@@ -51,7 +51,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final WordDao mDao;
-        // Array leeg laten !!!!!!!!!! @@@@@@@@@@@@@@@@@@@@@@@@
+
         String[] words = {"Hooi", "AVEVE Basiskorrel", "AVEVE Optima+ Balance","AVEVE Vitabar","Hartog Gras-mix"};
 
         PopulateDbAsync(WordRoomDatabase db) {

@@ -10,7 +10,7 @@ public class Food {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "food")
-    private String mWord;
+    private String food;
     @ColumnInfo(name = "dailyAmount")
     private int dailyAmount = 0;
     @ColumnInfo(name = "totalAmount")
@@ -20,13 +20,13 @@ public class Food {
     @ColumnInfo(name = "dailyDecrease")
     private boolean dailyDecrease;
 
-    public Food(@NonNull String word) {this.mWord = word;}
+    public Food(@NonNull String food) {this.food = food;}
 
     public int getDailyAmount() {return this.dailyAmount;}
 
     public double getTotalAmount() {return this.totalAmount;}
 
-    public String getWord(){return this.mWord;}
+    public String getFood(){return this.food;}
 
     public void setDailyAmount(int dailyAmount) {
         this.dailyAmount = dailyAmount;
