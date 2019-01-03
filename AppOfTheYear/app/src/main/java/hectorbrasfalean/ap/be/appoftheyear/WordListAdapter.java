@@ -78,4 +78,7 @@ public class WordListAdapter extends
             // update the RecyclerView to display the data.
         }
     }
+    public Food getFoodAtPosition (int position){
+        return mFoods.get(position);
+    }
 }

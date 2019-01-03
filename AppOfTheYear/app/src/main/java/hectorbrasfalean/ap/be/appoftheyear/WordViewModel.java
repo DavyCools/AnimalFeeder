@@ -22,4 +22,5 @@ public class WordViewModel extends AndroidViewModel {
 
     public void deleteAll() {mRepository.deleteAll();}
 
+    public void deleteFood(Food food) {mRepository.deleteFood(food);}
 }
