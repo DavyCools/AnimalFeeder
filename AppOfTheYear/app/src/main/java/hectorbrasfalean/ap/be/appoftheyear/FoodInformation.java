@@ -96,7 +96,7 @@ public class FoodInformation extends AppCompatActivity {
                 }
                 currentFood.setTotalAmount(--totalAmount);
                 mWordDao.updateFood(currentFood);
-                totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.0) / 100.0));
+                totalAmountDisplay.setText(Double.toString(totalAmount));
             }
             else{
                 ErrorMessage(totalAmountDisplay);
@@ -109,7 +109,7 @@ public class FoodInformation extends AppCompatActivity {
             totalAmount = Double.parseDouble(totalAmountDisplay.getText().toString());
             currentFood.setTotalAmount(++totalAmount);
             mWordDao.updateFood(currentFood);
-            totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.0) / 100.0));
+            totalAmountDisplay.setText(Double.toString(totalAmount));
         }
         else{
             ErrorMessage(totalAmountDisplay);
@@ -119,7 +119,7 @@ public class FoodInformation extends AppCompatActivity {
     public void DecreaseDailyAmount(View view) {
         if(dailyAmount > 0){
             if(dailyAmountDisplay.getText().toString().trim().length() > 0){
-                dailyAmount = Integer.parseInt(dailyAmountDisplay.getText().toString());
+                dailyAmount = Double.parseDouble(dailyAmountDisplay.getText().toString());
                 if(dailyAmount < 50)
                     dailyAmount = 50;
                 dailyAmount -= 50;
@@ -135,7 +135,7 @@ public class FoodInformation extends AppCompatActivity {
 
     public void IncreaseDailyAmount(View view) {
         if(dailyAmountDisplay.getText().toString().trim().length() > 0){
-            dailyAmount = Integer.parseInt(dailyAmountDisplay.getText().toString());
+            dailyAmount = Double.parseDouble(dailyAmountDisplay.getText().toString());
             dailyAmount += 50;
             currentFood.setTotalAmount(dailyAmount);
             mWordDao.updateFood(currentFood);
