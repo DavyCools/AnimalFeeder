@@ -57,6 +57,23 @@ public class WordRepository {
         }
     }
 
+    private static class deleteFoodAsyncTask extends AsyncTask<Food, Void, Void>{
+        private WordDao mAsyncTaskDao;
+
+        deleteFoodAsyncTask(WordDao dao){
+            mAsyncTaskDao = dao;
+        }
+        @Override
+        protected Void doInBackground(final Food... params){
+            mAsyncTaskDao.deleteFood(params[0]);
+            return null;
+        }
+    }
+
+    public void deleteFood(Food food){
+        new deleteFoodAsyncTask(mWordDao).execute(food);
+    }
+
     /*public void getFoodByName(String foodName)  {
         new getFoodByNameAsyncTask(mWordDao).execute(foodName);
     }
