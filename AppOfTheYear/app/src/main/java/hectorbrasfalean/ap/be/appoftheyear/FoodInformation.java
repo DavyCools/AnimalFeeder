@@ -45,7 +45,7 @@ public class FoodInformation extends AppCompatActivity {
 
         foodNameDisplay.setText(foodName);
         dailyAmountDisplay.setText(Double.toString(dailyAmount));
-        totalAmountDisplay.setText(Double.toString(totalAmount));
+        totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.00) / 100.00));
         notificationDisplay.setText(Integer.toString(notificationAmount));
         dagelijksVerbruikActivated = currentFood.getDailyDecrease();
         mSwitch = findViewById(R.id.switchDagelijksVerbruik);
@@ -96,7 +96,7 @@ public class FoodInformation extends AppCompatActivity {
                 }
                 currentFood.setTotalAmount(--totalAmount);
                 mWordDao.updateFood(currentFood);
-                totalAmountDisplay.setText(Double.toString(totalAmount));
+                totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.00) / 100.00));
             }
             else{
                 ErrorMessage(totalAmountDisplay);
@@ -109,7 +109,7 @@ public class FoodInformation extends AppCompatActivity {
             totalAmount = Double.parseDouble(totalAmountDisplay.getText().toString());
             currentFood.setTotalAmount(++totalAmount);
             mWordDao.updateFood(currentFood);
-            totalAmountDisplay.setText(Double.toString(totalAmount));
+            totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.00) / 100.00));
         }
         else{
             ErrorMessage(totalAmountDisplay);
