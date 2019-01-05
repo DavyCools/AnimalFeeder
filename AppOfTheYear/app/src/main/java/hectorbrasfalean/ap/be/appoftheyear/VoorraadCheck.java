@@ -40,8 +40,6 @@ public class VoorraadCheck extends AppCompatActivity {
         // Give the RecyclerView a default layout manager.
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
-
         // Get a new or existing ViewModel from the ViewModelProvider.
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
 

@@ -16,8 +16,7 @@ import java.text.DecimalFormat;
 public class FoodInformation extends AppCompatActivity {
     private TextView foodNameDisplay,dailyAmountDisplay,totalAmountDisplay,notificationDisplay;
     private WordDao mWordDao;
-    private double totalAmount;
-    private double dailyAmount;
+    private double totalAmount,dailyAmount;
     private int notificationAmount;
     private boolean dagelijksVerbruikActivated;
     private String foodName;
@@ -61,29 +60,48 @@ public class FoodInformation extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         int checkAll = 0;
-        if(totalAmountDisplay.getText().toString().trim().length() > 0){
-            currentFood.setTotalAmount(Double.parseDouble(totalAmountDisplay.getText().toString()));
-            checkAll++;
-        }
-        if(dailyAmountDisplay.getText().toString().trim().length() > 0){
-            currentFood.setDailyAmount(Double.parseDouble(dailyAmountDisplay.getText().toString()));
-            checkAll++;
-        }
-        if(notificationDisplay.getText().toString().trim().length() > 0){
-            currentFood.setNotificationAmount(Integer.parseInt(notificationDisplay.getText().toString()));
-            checkAll++;
+        checkAll = SetTotalAmount(checkAll);
+        checkAll = SetDailyAmount(checkAll);
+        checkAll = SetNotificationAmount(checkAll);
+        CheckToUpdateFood(checkAll);
+        super.onDestroy();
+    }
 
-        }
+    private void CheckToUpdateFood(int checkAll) {
         if(checkAll != 3){
             Toast.makeText(
                     getApplicationContext(),
-                    "Waardes van lege velden werden niet opgeslagen.",
+                    "Waarden van lege velden werden niet opgeslagen.",
                     Toast.LENGTH_LONG).show();
         }
         else{
             mWordDao.updateFood(currentFood);
         }
-        super.onDestroy();
+    }
+
+    private int SetNotificationAmount(int checkAll) {
+        if(notificationDisplay.getText().toString().trim().length() > 0){
+            currentFood.setNotificationAmount(Integer.parseInt(notificationDisplay.getText().toString()));
+            checkAll++;
+
+        }
+        return checkAll;
+    }
+
+    private int SetDailyAmount(int checkAll) {
+        if(dailyAmountDisplay.getText().toString().trim().length() > 0){
+            currentFood.setDailyAmount(Double.parseDouble(dailyAmountDisplay.getText().toString()));
+            checkAll++;
+        }
+        return checkAll;
+    }
+
+    private int SetTotalAmount(int checkAll) {
+        if(totalAmountDisplay.getText().toString().trim().length() > 0){
+            currentFood.setTotalAmount(Double.parseDouble(totalAmountDisplay.getText().toString()));
+            checkAll++;
+        }
+        return checkAll;
     }
 
     public void DecreaseTotalAmount(View view) {
@@ -99,7 +117,7 @@ public class FoodInformation extends AppCompatActivity {
                 totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.00) / 100.00));
             }
             else{
-                ErrorMessage(totalAmountDisplay);
+                SendErrorMessage(totalAmountDisplay);
             }
         }
     }
@@ -112,7 +130,7 @@ public class FoodInformation extends AppCompatActivity {
             totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.00) / 100.00));
         }
         else{
-            ErrorMessage(totalAmountDisplay);
+            SendErrorMessage(totalAmountDisplay);
         }
     }
 
@@ -128,7 +146,7 @@ public class FoodInformation extends AppCompatActivity {
                 dailyAmountDisplay.setText(Double.toString(dailyAmount));
             }
             else{
-                ErrorMessage(dailyAmountDisplay);
+                SendErrorMessage(dailyAmountDisplay);
             }
         }
     }
@@ -142,7 +160,7 @@ public class FoodInformation extends AppCompatActivity {
             dailyAmountDisplay.setText(Double.toString(dailyAmount));
         }
         else{
-            ErrorMessage(dailyAmountDisplay);
+            SendErrorMessage(dailyAmountDisplay);
         }
     }
 
@@ -155,7 +173,7 @@ public class FoodInformation extends AppCompatActivity {
                 notificationDisplay.setText(Integer.toString(notificationAmount));
             }
             else{
-                ErrorMessage(notificationDisplay);
+                SendErrorMessage(notificationDisplay);
             }
         }
     }
@@ -168,11 +186,11 @@ public class FoodInformation extends AppCompatActivity {
             notificationDisplay.setText(Integer.toString(notificationAmount));
         }
         else{
-            ErrorMessage(notificationDisplay);
+            SendErrorMessage(notificationDisplay);
         }
     }
 
-    private void ErrorMessage(TextView currentTextView){
+    private void SendErrorMessage(TextView currentTextView){
         currentTextView.setError("Het veld mag niet leeg zijn, vul een waarde in.");
     }
 

@@ -25,8 +25,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String LOG_TAG =
-            MainActivity.class.getSimpleName();
     private WordViewModel mWordViewModel;
     private ArrayList<String> mAllFoodNames = new ArrayList<>();
 
@@ -49,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerAlarm(List<Food> foods) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        calendar.set(Calendar.MINUTE, 28);
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.MINUTE, 7);
         calendar.set(Calendar.SECOND,0);
         Intent intent1 = new Intent(MainActivity.this, Notification_receiver.class);
 
@@ -64,25 +62,7 @@ public class MainActivity extends AppCompatActivity {
         am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_menu,menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if(id == R.id.action_settings){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-
-    }
-
     public void launchCheckVoorraad(View view) {
-        Log.d(LOG_TAG,"Ga naar voorraad check");
         Intent intent = new Intent(this, VoorraadCheck.class);
         startActivity(intent);
     }
