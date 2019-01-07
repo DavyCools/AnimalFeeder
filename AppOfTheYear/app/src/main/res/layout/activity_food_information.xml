@@ -6,6 +6,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     android:padding="24dp">
+
     <TextView
         android:id="@+id/textViewFood"
         android:layout_width="match_parent"
@@ -16,9 +17,9 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:gravity="center"
-        android:text="Naam eten"
-        android:textStyle="bold"
-        android:textSize="22sp" />
+        android:text="Name food"
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:id="@+id/textViewHoeveelheid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hoeveelheid (kg):"
+            android:text="@string/total_amount_food"
             android:textSize="20sp" />
 
         <Button
@@ -69,7 +70,7 @@
             android:id="@+id/textViewMelding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Melding vanaf (kg):"
+            android:text="@string/notify_from_food"
             android:textSize="20sp" />
 
         <Button
@@ -108,7 +109,7 @@
             android:id="@+id/textViewDagelijksVerbruik"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dagelijks verbruik (gram):"
+            android:text="@string/daily_consumption_food"
             android:textSize="20sp" />
 
         <Switch

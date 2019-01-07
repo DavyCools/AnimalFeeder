@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Horse Feeder</string>
-    <string name="check_voorraad">Check voorraad</string>
+    <string name="check_voorraad">Check stock</string>
     <string name="mainpicture">MainPicture</string>
     <string name="title_activity_voorraad_check">Stock Check</string>
     <string name="hint_word">New Food</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Food name not saved because it is empty.</string>
     <string name="clear_all_data">Clear all data</string>
+    <string name="total_amount_food">Total Amount (kg):</string>
+    <string name="notify_from_food">Notify from(kg):</string>
+    <string name="daily_consumption_food">Daily consumption (g):</string>
 </resources>

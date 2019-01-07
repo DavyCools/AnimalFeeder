@@ -72,7 +72,7 @@ public class FoodInformation extends AppCompatActivity {
         if(checkAll != 3){
             Toast.makeText(
                     getApplicationContext(),
-                    "Waarden van lege velden werden niet opgeslagen.",
+                    "Empty fields were not saved.",
                     Toast.LENGTH_LONG).show();
         }
         else{
@@ -191,7 +191,7 @@ public class FoodInformation extends AppCompatActivity {
     }
 
     private void SendErrorMessage(TextView currentTextView){
-        currentTextView.setError("Het veld mag niet leeg zijn, vul een waarde in.");
+        currentTextView.setError("The field can't be empty, please enter a value.");
     }
 
 }
