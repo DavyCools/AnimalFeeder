@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="userPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,6 +19,7 @@
         </activity>
         <receiver android:name=".Notification_receiver"/>
         <activity
+            android:screenOrientation="userPortrait"
             android:name=".VoorraadCheck"
             android:label="@string/title_activity_voorraad_check"
             android:parentActivityName=".MainActivity"
@@ -26,8 +28,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hectorbrasfalean.ap.be.appoftheyear.MainActivity" />
         </activity>
-        <activity android:name=".FoodInformation" />
-        <activity android:name=".NewFoodActivity"></activity>
+        <activity android:name=".FoodInformation"
+            android:screenOrientation="userPortrait"/>
+        <activity android:name=".NewFoodActivity"
+            android:screenOrientation="userPortrait"></activity>
     </application>
 
 </manifest>

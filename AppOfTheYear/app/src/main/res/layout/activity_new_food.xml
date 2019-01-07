@@ -4,13 +4,15 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    >
 
     <EditText
         android:id="@+id/edit_word"
         style="@style/edittext_style"
         android:hint="@string/hint_word"
-        android:inputType="textAutoComplete" />
+        android:inputType="textAutoComplete"
+        />
 
     <Button
         android:id="@+id/button_save"

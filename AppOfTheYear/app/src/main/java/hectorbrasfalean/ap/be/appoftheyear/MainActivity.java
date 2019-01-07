@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerAlarm(List<Food> foods) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 11);
-        calendar.set(Calendar.MINUTE, 7);
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        calendar.set(Calendar.MINUTE, 34);
         calendar.set(Calendar.SECOND,0);
         Intent intent1 = new Intent(MainActivity.this, Notification_receiver.class);
 
