@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class FoodInformation extends AppCompatActivity {
     private TextView foodNameDisplay,dailyAmountDisplay,totalAmountDisplay,notificationDisplay;
@@ -22,7 +23,7 @@ public class FoodInformation extends AppCompatActivity {
     private String foodName;
     private Food currentFood;
     private Switch mSwitch;
-
+    NumberFormat nf = new DecimalFormat("#");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class FoodInformation extends AppCompatActivity {
         notificationAmount = currentFood.getNotificationAmount();
 
         foodNameDisplay.setText(foodName);
-        dailyAmountDisplay.setText(Double.toString(dailyAmount));
+        dailyAmountDisplay.setText(nf.format(dailyAmount));
         totalAmountDisplay.setText(Double.toString(Math.round(totalAmount * 100.00) / 100.00));
         notificationDisplay.setText(Integer.toString(notificationAmount));
         dagelijksVerbruikActivated = currentFood.getDailyDecrease();
@@ -143,21 +144,20 @@ public class FoodInformation extends AppCompatActivity {
                 dailyAmount -= 50;
                 currentFood.setTotalAmount(dailyAmount);
                 mWordDao.updateFood(currentFood);
-                dailyAmountDisplay.setText(Double.toString(dailyAmount));
+                dailyAmountDisplay.setText(nf.format(dailyAmount));
             }
             else{
                 SendErrorMessage(dailyAmountDisplay);
             }
         }
     }
-
     public void IncreaseDailyAmount(View view) {
         if(dailyAmountDisplay.getText().toString().trim().length() > 0){
             dailyAmount = Double.parseDouble(dailyAmountDisplay.getText().toString());
             dailyAmount += 50;
             currentFood.setTotalAmount(dailyAmount);
             mWordDao.updateFood(currentFood);
-            dailyAmountDisplay.setText(Double.toString(dailyAmount));
+            dailyAmountDisplay.setText(nf.format(dailyAmount));
         }
         else{
             SendErrorMessage(dailyAmountDisplay);
