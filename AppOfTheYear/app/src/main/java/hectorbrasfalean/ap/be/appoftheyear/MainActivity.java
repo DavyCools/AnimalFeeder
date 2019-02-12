@@ -47,11 +47,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerAlarm(List<Food> foods) {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 13);
-        calendar.set(Calendar.MINUTE, 0);
+        Calendar now = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.MINUTE, 34);
         calendar.set(Calendar.SECOND,0);
         Intent intent1 = new Intent(MainActivity.this, Notification_receiver.class);
+        if(now.after(calendar)){
+            calendar.add(Calendar.DATE,1);
 
+        }
         for (Food currentFood : foods) {
            mAllFoodNames.add(currentFood.getFood());
         }
